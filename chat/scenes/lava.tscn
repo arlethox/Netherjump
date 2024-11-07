@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3nbyrx8ywp70"]
+
+[ext_resource type="Script" path="res://scrips/lava.gd" id="1_epwuu"]
+[ext_resource type="Texture2D" uid="uid://b417qirjw2f3r" path="res://sprites/Lava.png" id="2_5xfam"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vsnwe"]
+size = Vector2(731, 176)
+
+[node name="Lava" type="Area2D"]
+collision_layer = 2
+script = ExtResource("1_epwuu")
+
+[node name="lava" type="Sprite2D" parent="."]
+position = Vector2(7, 87)
+scale = Vector2(1.7834, 1.7834)
+texture = ExtResource("2_5xfam")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(7.5, 89)
+shape = SubResource("RectangleShape2D_vsnwe")

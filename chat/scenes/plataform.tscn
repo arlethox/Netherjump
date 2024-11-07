@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://hl4p14smuvx6"]
+
+[ext_resource type="Texture2D" uid="uid://bb1kajflmbcv5" path="res://sprites/platforms.png" id="1_itn56"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m7qed"]
+texture = ExtResource("1_itn56")
+0:0/0 = 0
+0:2/0 = 0
+2:2/size_in_atlas = Vector2i(3, 1)
+2:2/0 = 0
+2:0/size_in_atlas = Vector2i(4, 1)
+2:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_i7rg8"]
+sources/1 = SubResource("TileSetAtlasSource_m7qed")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y1bn0"]
+size = Vector2(48, 8)
+
+[node name="Plataform" type="AnimatableBody2D"]
+position = Vector2(-2, 0)
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2(-1, 0)
+tile_set = SubResource("TileSet_i7rg8")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 131073, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 3.96863)
+shape = SubResource("RectangleShape2D_y1bn0")
+one_way_collision = true
