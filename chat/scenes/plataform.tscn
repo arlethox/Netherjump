@@ -1,32 +1,34 @@
-[gd_scene load_steps=5 format=3 uid="uid://hl4p14smuvx6"]
+[gd_scene load_steps=6 format=3 uid="uid://hl4p14smuvx6"]
 
-[ext_resource type="Texture2D" uid="uid://bb1kajflmbcv5" path="res://sprites/platforms.png" id="1_itn56"]
+[ext_resource type="Script" path="res://scrips/plataform.gd" id="1_efiqq"]
+[ext_resource type="Texture2D" uid="uid://c4rrdj3hcgss7" path="res://sprites/platforms1.png" id="2_lh1ye"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m7qed"]
-texture = ExtResource("1_itn56")
-0:0/0 = 0
-0:2/0 = 0
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n5xeu"]
+texture = ExtResource("2_lh1ye")
 2:2/size_in_atlas = Vector2i(3, 1)
 2:2/0 = 0
 2:0/size_in_atlas = Vector2i(4, 1)
 2:0/0 = 0
+0:0/0 = 0
+0:2/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_i7rg8"]
-sources/1 = SubResource("TileSetAtlasSource_m7qed")
+sources/0 = SubResource("TileSetAtlasSource_n5xeu")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y1bn0"]
-size = Vector2(48, 8)
+size = Vector2(16, 8)
 
 [node name="Plataform" type="AnimatableBody2D"]
 position = Vector2(-2, 0)
+script = ExtResource("1_efiqq")
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(-1, 0)
 tile_set = SubResource("TileSet_i7rg8")
 format = 2
-layer_0/tile_data = PackedInt32Array(0, 131073, 0)
+layer_0/tile_data = PackedInt32Array(0, 0, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3, 3.96863)
+position = Vector2(7, 3.96863)
 shape = SubResource("RectangleShape2D_y1bn0")
 one_way_collision = true
