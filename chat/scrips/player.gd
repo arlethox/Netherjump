@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 const SPEED: float = 150.0
-const JUMP_VELOCITY: float = -300.0
+const JUMP_VELOCITY: float = -350.0
 const GRAVITY: float = 900.0
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -34,10 +34,10 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.play("salto")
 
 	# Aplicar movimiento
-	if direction != 0.0:
+	if direction:
 		velocity.x = direction * SPEED
 	else:
-		velocity.x = move_toward(velocity.x, 0.0, SPEED * delta)
+		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
 
@@ -53,3 +53,5 @@ func _on_Lava_body_entered(body: Node) -> void:
 # Función de "Game Over" para reiniciar la escena actual
 func game_over() -> void:
 	get_tree().reload_current_scene()
+func _ready():
+	add_to_group("Player")
