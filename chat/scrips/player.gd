@@ -3,9 +3,10 @@ extends CharacterBody2D
 const SPEED: float = 150.0
 const JUMP_VELOCITY: float = -350.0
 const GRAVITY: float = 900.0
-
-@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 signal player_died  # Señal de muerte del jugador
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var death_sound: AudioStreamPlayer = $DeathSound  # Referencia al sonido de muerte
+
 
 func _ready():
 	add_to_group("Player")
@@ -51,12 +52,17 @@ func _physics_process(delta: float) -> void:
 
 # Función de "Game Over" que reproduce la animación de muerte y luego reinicia la escena
 func game_over() -> void:
-	# Reproducir la animación de muerte y emitir la señal
 	animated_sprite.play("muerte")
-	velocity = Vector2.ZERO  # Detener al jugador
-
-	emit_signal("player_died")  # Emitir la señal para detener la lava
-
-	# Esperar antes de reiniciar la escena
+	velocity = Vector2.ZERO
+	
+	death_sound.play()
+	emit_signal("player_died")
+	
+	# Esperar un momento antes de mostrar la pantalla de Game Over
 	await get_tree().create_timer(1.5).timeout
-	get_tree().reload_current_scene()
+	show_game_over_screen()
+
+func show_game_over_screen():
+	# Cargar y mostrar la pantalla de Game Over
+	var game_over_scene = preload("res://scenes/game_over_screen.tscn").instantiate()
+	get_tree().root.add_child(game_over_scene)

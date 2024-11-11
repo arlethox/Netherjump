@@ -1,23 +1,20 @@
-extends CanvasLayer
+extends Node2D
 
-@export var coin_count: int = 0  # Contador de monedas
-
-@onready var coin_count_label: Label = $CoinCountLabel  # Ruta al Label
+@export var coin_counter_label: Label  # Referencia al Label que muestra el número de monedas
+@export var coin_icon: TextureRect  # Referencia al TextureRect que muestra la imagen de la moneda
+var coin_count: int = 0
 
 func _ready():
-	# Conectar la señal coin_collected de la moneda
-	var coin = get_node("/root/MainScene/moneda")  # Asegúrate de que la ruta sea correcta
-	coin.connect("coin_collected", Callable(self, "_on_coin_collected"))
-	
-	# Actualizar el contador desde el inicio
-	update_coin_count()
+	# Asegúrate de que el Label y el TextureRect estén conectados
+	coin_counter_label = $Label  # Asigna el Label
+	coin_icon = $TextureRect  # Asigna el TextureRect
+	update_coin_counter()
 
-# Método que se llama cuando la señal coin_collected se emite
-func _on_coin_collected():
-	# Incrementar el contador de monedas cuando se recoja una
+# Función para actualizar el contador de monedas
+func update_coin_counter():
+	coin_counter_label.text = str(coin_count)  # Mostrar el número de monedas
+
+# Método para aumentar el contador cuando se recolecta una moneda
+func add_coin():
 	coin_count += 1
-	update_coin_count()  # Actualizar la UI
-
-func update_coin_count():
-	# Actualizar el texto del contador de monedas en la UI
-	coin_count_label.text = "Monedas: " + str(coin_count)
+	update_coin_counter()

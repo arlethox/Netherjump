@@ -18,7 +18,7 @@ func _ready():
 
 # Función para actualizar el contador de monedas
 func update_coin_counter():
-	coin_counter_label.text = "Diamantes: %d" % coin_count
+	coin_counter_label.text = ": %d" % coin_count
 
 # Método para aumentar el contador cuando se recolecta una moneda
 func add_coin():
