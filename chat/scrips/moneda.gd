@@ -6,8 +6,8 @@ signal coin_collected
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 func _ready():
-	# Inicialización
-	pass
+	# Conectar el evento body_entered a la función _on_body_entered usando Callable
+	connect("body_entered", Callable(self, "_on_body_entered"))
 
 # Método que se llama cuando el jugador entra en contacto con la moneda
 func _on_body_entered(body: Node) -> void:

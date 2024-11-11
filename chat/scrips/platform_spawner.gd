@@ -1,19 +1,19 @@
 extends Node2D
 
 @export var platform_scene: PackedScene
+@export var coin_scene: PackedScene  # Escena de la moneda
 @export var spawn_area_width: float = 160.0
 @export var platform_min_y_spacing: float = 30.0
 @export var platform_max_y_spacing: float = 45.0
 @export var spawn_interval: float = 0.5  # Intervalo de aparición en segundos
 @export var delete_interval: float = 1.0  # Intervalo de eliminación en segundos
+@export var spawn_chance: float = 1.3  # Probabilidad de que aparezca una moneda en una plataforma (30%)
 
 var spawn_timer = 0.0  # Temporizador para la aparición de plataformas
 var last_y = 0.0  # Altura de la última plataforma generada
 var platforms_queue = []  # Cola para rastrear las plataformas generadas
 
 func _ready():
-	# Carga la escena de plataforma si no se asigna en el inspector
-	platform_scene = load("res://scenes/plataform.tscn")  # Cambia a la ruta correcta de tu archivo
 	generate_initial_platforms()
 	
 	# Configura un temporizador para eliminar plataformas en el orden de aparición
@@ -45,8 +45,23 @@ func spawn_platform(spawn_position: Vector2):
 	# Añadir la plataforma a la cola para rastrear el orden de aparición
 	platforms_queue.append(platform)
 	
+	# Posibilidad de generar una moneda en esta plataforma
+	maybe_spawn_coin(platform)
+	
 	# Ajusta la posición para que las próximas plataformas sigan hacia arriba
 	last_y -= randf_range(platform_min_y_spacing, platform_max_y_spacing)
+
+func maybe_spawn_coin(platform: Node2D):
+	# Genera un número aleatorio para decidir si aparece una moneda
+	if randf() < spawn_chance:
+		var coin = coin_scene.instantiate()  # Crea una instancia de la moneda
+		# Coloca la moneda justo encima de la plataforma
+		coin.position = platform.position + Vector2(0, -10)  # Ajusta la posición según el tamaño de la moneda
+		add_child(coin)
+
+		# Conectar la señal `coin_collected` de la moneda al `add_coin` del CoinCounter en UI
+		var ui = get_tree().root.get_node("MainScene/UI")  # Ajusta la ruta según tu jerarquía
+		coin.connect("coin_collected", Callable(ui, "add_coin"))
 
 func _delete_oldest_platform():
 	# Verifica que haya plataformas en la cola

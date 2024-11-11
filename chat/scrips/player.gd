@@ -6,10 +6,17 @@ const GRAVITY: float = 900.0
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
+func _ready():
+	add_to_group("Player")
+
 func _physics_process(delta: float) -> void:
+	# Si el jugador está muriendo, no procesar movimientos
+	if animated_sprite.animation == "muerte":
+		return
+
 	# Aplicar gravedad si no está en el suelo
 	if not is_on_floor():
-		velocity.y += GRAVITY * delta  # Asegúrate de tener una constante GRAVITY definida
+		velocity.y += GRAVITY * delta
 
 	# Manejar el salto
 	if Input.is_action_just_pressed("salto") and is_on_floor():
@@ -41,17 +48,12 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-# Detectar colisión con la lava y reiniciar la escena
-func _on_body_entered(body: Node) -> void:
-	if body.name == "lava":
-		game_over()
-
-func _on_Lava_body_entered(body: Node) -> void:
-	if body == self:
-		game_over()
-
-# Función de "Game Over" para reiniciar la escena actual
+# Función de "Game Over" que reproduce la animación de muerte y luego reinicia la escena
 func game_over() -> void:
+	# Reproducir la animación de muerte y desactivar el movimiento
+	animated_sprite.play("muerte")
+	velocity = Vector2.ZERO  # Detener al jugador
+
+	# Esperar 2 segundos (o el tiempo necesario) antes de reiniciar la escena
+	await get_tree().create_timer(2.0).timeout
 	get_tree().reload_current_scene()
-func _ready():
-	add_to_group("Player")

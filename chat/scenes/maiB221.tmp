@@ -457,14 +457,13 @@ offset = Vector2(0, -87.37)
 transform = Transform2D(1, 0, 0, 1, 0, -87.37)
 script = ExtResource("1_mcayh")
 
-[node name="moneda" parent="." groups=["Monedas"] instance=ExtResource("7_xq5ho")]
+[node name="moneda" parent="." instance=ExtResource("7_xq5ho")]
 position = Vector2(60, -60)
 
 [node name="PlatformSpawner" type="Node2D" parent="."]
 position = Vector2(-1, -43)
 script = ExtResource("8_1esud")
 platform_scene = ExtResource("2_7mrjf")
-coin_scene = ExtResource("7_xq5ho")
 
 [node name="Barreras" type="Node" parent="."]
 
