@@ -5,6 +5,7 @@ const JUMP_VELOCITY: float = -350.0
 const GRAVITY: float = 900.0
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+signal player_died  # Señal de muerte del jugador
 
 func _ready():
 	add_to_group("Player")
@@ -50,10 +51,12 @@ func _physics_process(delta: float) -> void:
 
 # Función de "Game Over" que reproduce la animación de muerte y luego reinicia la escena
 func game_over() -> void:
-	# Reproducir la animación de muerte y desactivar el movimiento
+	# Reproducir la animación de muerte y emitir la señal
 	animated_sprite.play("muerte")
 	velocity = Vector2.ZERO  # Detener al jugador
 
-	# Esperar 2 segundos (o el tiempo necesario) antes de reiniciar la escena
-	await get_tree().create_timer(2.0).timeout
+	emit_signal("player_died")  # Emitir la señal para detener la lava
+
+	# Esperar antes de reiniciar la escena
+	await get_tree().create_timer(1.5).timeout
 	get_tree().reload_current_scene()

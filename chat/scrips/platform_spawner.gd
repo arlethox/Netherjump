@@ -7,7 +7,7 @@ extends Node2D
 @export var platform_max_y_spacing: float = 45.0
 @export var spawn_interval: float = 0.5  # Intervalo de aparición en segundos
 @export var delete_interval: float = 1.0  # Intervalo de eliminación en segundos
-@export var spawn_chance: float = 1.3  # Probabilidad de que aparezca una moneda en una plataforma (30%)
+@export var spawn_chance: float = 1.0  # Probabilidad de que aparezca una moneda en una plataforma (30%)
 
 var spawn_timer = 0.0  # Temporizador para la aparición de plataformas
 var last_y = 0.0  # Altura de la última plataforma generada
