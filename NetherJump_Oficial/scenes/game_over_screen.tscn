@@ -10,6 +10,14 @@ font_size = 161
 [node name="GameOverScreen" type="CanvasLayer"]
 script = ExtResource("1_g32qp")
 
+[node name="FadeOverlay" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_left = 164.0
 offset_top = 80.0

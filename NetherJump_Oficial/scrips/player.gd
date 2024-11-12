@@ -60,15 +60,23 @@ func game_over() -> void:
 	death_sound.play()
 	emit_signal("player_died")
 	
-	# Detener la música de fondo
-	if background_music and background_music.playing:
-		background_music.stop()
-	
-	# Esperar un momento antes de mostrar la pantalla de Game Over
-	await get_tree().create_timer(0.9).timeout
-	show_game_over_screen()
-
-func show_game_over_screen():
-	# Instanciar y añadir la pantalla de Game Over al nodo raíz
+	# Instanciar la escena de Game Over
 	var game_over_instance = game_over_scene.instantiate()
 	get_tree().root.add_child(game_over_instance)
+
+	# Acceder al FadeOverlay dentro de la instancia de Game Over
+	var fade_overlay = game_over_instance.get_node("FadeOverlay")  # Ajusta la ruta si es necesario
+	fade_overlay.visible = true
+	fade_overlay.modulate.a = 0  # Empezar desde transparencia total
+
+	# Crear el efecto de fundido en el ColorRect usando un Tweener
+	var tweener = get_tree().create_tween()
+	tweener.tween_property(
+		fade_overlay,          # Nodo que queremos animar
+		"modulate:a",          # Propiedad de opacidad del color
+		1.0,                   # Valor final (opaco)
+		1.5                    # Duración de la transición en segundos
+	)
+
+	# Esperar a que el fundido termine antes de finalizar la animación (si es necesario)
+	await tweener.finished
