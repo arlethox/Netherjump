@@ -1,0 +1,105 @@
+[gd_scene load_steps=11 format=3 uid="uid://cfwtll36u1yib"]
+
+[ext_resource type="Script" path="res://scrips/menu_inicio.gd" id="1_2xrvj"]
+[ext_resource type="Texture2D" uid="uid://4bo3ahikmhvg" path="res://sprites/Logo.png" id="1_c8xb4"]
+[ext_resource type="FontFile" uid="uid://dwc3ed8im65wo" path="res://sprites/MonsterFriendFore.otf" id="3_rtbnu"]
+[ext_resource type="Texture2D" uid="uid://by2dncqwxwxns" path="res://sprites/Fondo.png" id="3_ylxeg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_04dpl"]
+bg_color = Color(0.8, 0.266667, 0.133333, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m6ral"]
+bg_color = Color(0.333333, 0.2, 0.2, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5t64k"]
+bg_color = Color(0.890196, 0.32549, 0.0745098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bism4"]
+bg_color = Color(0.8, 0.266667, 0.133333, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sup7e"]
+bg_color = Color(0.333333, 0.2, 0.2, 0)
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4fyo7"]
+bg_color = Color(0.890196, 0.32549, 0.0745098, 1)
+
+[node name="menu_inicio" type="CanvasLayer"]
+script = ExtResource("1_2xrvj")
+
+[node name="Control" type="Control" parent="."]
+light_mask = 2
+visibility_layer = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="TituloImagen" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.518229
+anchor_top = 0.442205
+anchor_right = 0.518229
+anchor_bottom = 0.442205
+offset_left = -451.0
+offset_top = -253.549
+offset_right = 451.0
+offset_bottom = 253.549
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_c8xb4")
+expand_mode = 5
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="ButtonJugar" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.340712
+anchor_top = 0.755401
+anchor_right = 0.440538
+anchor_bottom = 0.810957
+offset_left = -14.5
+offset_top = -11.5
+offset_right = 14.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_rtbnu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_04dpl")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_m6ral")
+theme_override_styles/normal = SubResource("StyleBoxFlat_5t64k")
+text = "play"
+metadata/_edit_use_anchors_ = true
+
+[node name="ButtonSalir" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.584635
+anchor_top = 0.756944
+anchor_right = 0.684462
+anchor_bottom = 0.810957
+offset_left = -14.5
+offset_top = -11.5
+offset_right = 14.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_rtbnu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_bism4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_sup7e")
+theme_override_styles/normal = SubResource("StyleBoxFlat_4fyo7")
+text = "Exit"
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 512
+visibility_layer = 512
+z_index = -10
+position = Vector2(628, -295)
+scale = Vector2(1.28333, 1.28333)
+texture = ExtResource("3_ylxeg")
