@@ -1,2 +1,1 @@
-# Netherjump
-GodotGame
+Un juego de plataformas en 2D tipo The Floor is Lava, donde el jugador debe ascender plataformas generadas aleatoriamente para escapar de la lava ascendente. El juego incluye obstáculos, power-ups, y una experiencia dinámica basada en habilidad.
