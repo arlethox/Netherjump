@@ -1,14 +1,19 @@
 extends CharacterBody2D
 
-const SPEED: float = 150.0
+const BASE_SPEED: float = 150.0
+const SPEED_INCREMENT: float = 5.0  # Incremento de velocidad
+const HEIGHT_THRESHOLD: float = 100.0  # Altura a la que se incrementa la velocidad
 const JUMP_VELOCITY: float = -350.0
 const GRAVITY: float = 900.0
 signal player_died  # Señal de muerte del jugador
+
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var death_sound: AudioStreamPlayer = $DeathSound
 @onready var game_over_scene := preload("res://scenes/game_over_screen.tscn")  # Preload de la escena de Game Over
 @onready var background_music := get_tree().root.get_node("MainScene/BackgroundMusic")  # Ruta al nodo de la música de fondo
 
+var current_speed: float = BASE_SPEED  # Velocidad actual del jugador
+var max_height_reached: float = 0.0  # Altura máxima alcanzada por el jugador
 
 func _ready():
 	add_to_group("Player")
@@ -17,6 +22,16 @@ func _physics_process(delta: float) -> void:
 	# Si el jugador está muriendo, no procesar movimientos
 	if animated_sprite.animation == "muerte":
 		return
+
+	# Incrementar la velocidad según la altura alcanzada
+	if position.y < max_height_reached - HEIGHT_THRESHOLD:
+		current_speed += SPEED_INCREMENT
+		max_height_reached = position.y
+		
+		# Notificar a la lava para que ajuste su velocidad
+		var lava = get_tree().root.get_node("MainScene/Lava")  # Ajusta la ruta a la lava si es necesario
+		if lava:
+			lava.update_speed(current_speed)
 
 	# Aplicar gravedad si no está en el suelo
 	if not is_on_floor():
@@ -46,9 +61,9 @@ func _physics_process(delta: float) -> void:
 
 	# Aplicar movimiento
 	if direction:
-		velocity.x = direction * SPEED
+		velocity.x = direction * current_speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, current_speed)
 
 	move_and_slide()
 

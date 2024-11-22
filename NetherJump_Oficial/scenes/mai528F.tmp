@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://03wej76sxj2v"]
+[gd_scene load_steps=20 format=3 uid="uid://03wej76sxj2v"]
 
 [ext_resource type="Texture2D" uid="uid://cmlemanekq4st" path="res://sprites/Textures-16.png" id="1_4l1k6"]
 [ext_resource type="Script" path="res://scrips/main_scene.gd" id="1_ofg3k"]
@@ -9,12 +9,11 @@
 [ext_resource type="AudioStream" uid="uid://cf3r66phpk8uq" path="res://sprites/sound.wav" id="5_kbn2p"]
 [ext_resource type="PackedScene" uid="uid://dr1sbt1h6ksg6" path="res://scenes/moneda.tscn" id="7_xq5ho"]
 [ext_resource type="Script" path="res://scrips/platform_spawner.gd" id="8_1esud"]
+[ext_resource type="Texture2D" uid="uid://by2dncqwxwxns" path="res://sprites/Fondo.png" id="11_4ho0t"]
 [ext_resource type="Texture2D" uid="uid://4ph4vbedts6a" path="res://sprites/diamante.png" id="11_yecb0"]
 [ext_resource type="Script" path="res://scrips/ui.gd" id="12_irg1w"]
 [ext_resource type="AudioStream" uid="uid://cuftg6i5geyrf" path="res://sprites/MusicaFondo.wav" id="13_4kcqu"]
-[ext_resource type="Texture2D" uid="uid://by2dncqwxwxns" path="res://sprites/fondo.png" id="14_enquf"]
 [ext_resource type="Script" path="res://scrips/background_music.gd" id="14_qoy5l"]
-[ext_resource type="Script" path="res://scrips/parallax_background.gd" id="14_yd5ya"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nrn01"]
 
@@ -456,7 +455,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(3, 3)
+zoom = Vector2(4, 4)
 limit_bottom = 9000
 position_smoothing_enabled = true
 script = ExtResource("2_lu0r8")
@@ -469,6 +468,17 @@ position = Vector2(-1, -43)
 script = ExtResource("8_1esud")
 platform_scene = ExtResource("2_7mrjf")
 coin_scene = ExtResource("7_xq5ho")
+player_path = null
+platform_min_y_spacing = null
+platform_max_y_spacing = null
+max_horizontal_distance = null
+min_horizontal_spacing = null
+spawn_area_width = null
+spawn_interval = null
+delete_interval = null
+spawn_chance = null
+mobile_platform_chance = null
+jump_height = null
 
 [node name="Barreras" type="Node" parent="."]
 
@@ -512,10 +522,10 @@ metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect" type="TextureRect" parent="UI/CoinCounter"]
 layout_mode = 0
-offset_left = -21.0
-offset_top = 24.0
-offset_right = 31.0
-offset_bottom = 72.0
+offset_left = -13.0
+offset_top = 23.0
+offset_right = 39.0
+offset_bottom = 71.0
 texture = ExtResource("11_yecb0")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
@@ -524,23 +534,25 @@ offset_top = -726.0
 offset_right = 45.0
 offset_bottom = -686.0
 
+[node name="Fondo" type="Sprite2D" parent="CenterContainer"]
+visible = false
+light_mask = 512
+visibility_layer = 512
+z_index = -10
+scale = Vector2(0.835185, 0.835185)
+texture = ExtResource("11_4ho0t")
+
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_4kcqu")
 autoplay = true
 script = ExtResource("14_qoy5l")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-script = ExtResource("14_yd5ya")
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 
-[node name="Fondo" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-light_mask = 512
-visibility_layer = 512
-z_index = -10
-texture_repeat = 2
-position = Vector2(-3, -631)
-scale = Vector2(1.04444, 1.04444)
-texture = ExtResource("14_enquf")
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
 
 [connection signal="area_entered" from="Lava" to="Player" method="_on_lava_area_entered"]

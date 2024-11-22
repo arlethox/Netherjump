@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cfckvws6rkel3"]
+[gd_scene load_steps=6 format=3 uid="uid://cfckvws6rkel3"]
 
 [ext_resource type="Script" path="res://scrips/game_over_screen.gd" id="1_g32qp"]
 [ext_resource type="Script" path="res://scrips/button.gd" id="2_fqwm4"]
 [ext_resource type="Texture2D" uid="uid://cwxjk4vmdvmef" path="res://sprites/gameover.png" id="2_mabd8"]
+[ext_resource type="FontFile" uid="uid://dwc3ed8im65wo" path="res://sprites/MonsterFriendFore.otf" id="3_8op8k"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_y3oin"]
 font_size = 161
@@ -14,15 +15,23 @@ script = ExtResource("1_g32qp")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 301.0
+offset_bottom = 238.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_left = 164.0
-offset_top = 80.0
-offset_right = 951.0
-offset_bottom = 523.0
+anchors_preset = -1
+anchor_left = 0.389
+anchor_top = 0.593
+anchor_right = 0.611
+anchor_bottom = 0.642
+offset_left = -349.128
+offset_top = -363.264
+offset_right = 349.128
+offset_bottom = 141.984
+grow_horizontal = 2
 texture = ExtResource("2_mabd8")
 expand_mode = 1
 
@@ -42,11 +51,16 @@ vertical_alignment = 1
 
 [node name="Button" type="Button" parent="."]
 anchors_preset = -1
-anchor_top = -0.038
-anchor_bottom = -0.038
-offset_left = 478.0
-offset_top = 496.624
-offset_right = 660.0
-offset_bottom = 545.624
+anchor_left = 0.333
+anchor_top = 0.654
+anchor_right = 0.667
+anchor_bottom = 0.654
+offset_left = 85.884
+offset_top = 84.208
+offset_right = -85.884
+offset_bottom = 144.208
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_8op8k")
 text = "Volver a Jugar"
 script = ExtResource("2_fqwm4")
